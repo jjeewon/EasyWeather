@@ -14,3 +14,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "EasyWeather"
 include ':app'
+include ':domain'
+include ':data'
+include ':presentation'
+include ':datasource'
