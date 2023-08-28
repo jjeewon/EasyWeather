@@ -59,6 +59,7 @@ dependencies {
     implementation project(":datasource")
     implementation project(":presentation")
 
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
 
     kapt("com.google.dagger:hilt-android-compiler:2.44")
     kapt 'androidx.hilt:hilt-compiler:1.0.0'
