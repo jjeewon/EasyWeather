@@ -19,7 +19,6 @@ fun WeatherScreen(
     Scaffold { paddingValues ->
         WeatherContent(
             modifier = Modifier
-                .fillMaxSize()
                 .padding(paddingValues),
             weatherDetailUiState = uiState.weatherDetailUiState
         )

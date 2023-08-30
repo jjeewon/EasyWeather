@@ -11,6 +11,6 @@ class WeatherDataToDomainMapper {
         tempF = input.tempF,
         humidity = input.humidity,
         condition = input.condition,
-        conditionIcon = input.conditionIcon
+        conditionIcon = "https:${input.conditionIcon}"
     )
 }
