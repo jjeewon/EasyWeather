@@ -23,30 +23,24 @@ class WeatherViewModel(
 
     fun getWeatherFromLocation(lat: Double, lng: Double) {
         viewModelScope.launch {
-            getWeatherUseCase.run(
-                value = GetWeatherUseCase.Param.LatLng(
-                    lat = lat,
-                    lng = lng,
-                ),
-                onResult = {
-                    val result = weatherDomainToPresentationMapper.toPresentation(it)
-                    val weatherDetailUiState = WeatherDetailUiState.Visible(
-                        name = result.name,
-                        region = result.region,
-                        temp = result.tempC.toString(),
-                        humidity = result.humidity.toString(),
-                        condition = result.condition,
-                        conditionIcon = result.conditionIcon
-                    )
-                    updateUiState {
-                        this.copy(
-                            isLoading = false,
-                            weatherDetailUiState = weatherDetailUiState
-                        )
-                    }
-                },
-                onException = {}
+            val result = weatherDomainToPresentationMapper.toPresentation(getWeatherUseCase.executeInBackground(GetWeatherUseCase.Param.LatLng(
+                lat = lat,
+                lng = lng,
+            )))
+            val weatherDetailUiState = WeatherDetailUiState.Visible(
+                name = result.name,
+                region = result.region,
+                temp = result.tempC.toString(),
+                humidity = result.humidity.toString(),
+                condition = result.condition,
+                conditionIcon = result.conditionIcon
             )
+            updateUiState {
+                this.copy(
+                    isLoading = false,
+                    weatherDetailUiState = weatherDetailUiState
+                )
+            }
         }
     }
 }
