@@ -34,7 +34,7 @@ class WeatherActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            WeatherScreen(viewModel)
+            WeatherApp()
         }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
