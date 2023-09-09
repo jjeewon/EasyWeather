@@ -7,13 +7,8 @@ import android.os.Looper
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.ui.Modifier
 import androidx.core.app.ActivityCompat
-import com.example.easyweather.ui.theme.EasyWeatherTheme
-import com.example.easyweather.ui.weather.WeatherScreen
+import com.example.easyweather.navigation.WeatherApp
 import com.example.presentation.weather.viewmodel.WeatherViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -34,7 +29,7 @@ class WeatherActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            WeatherApp()
+            WeatherApp(viewModel)
         }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)

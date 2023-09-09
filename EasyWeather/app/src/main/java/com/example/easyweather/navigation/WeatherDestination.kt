@@ -1,4 +1,4 @@
-package com.example.easyweather
+package com.example.easyweather.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
@@ -30,7 +30,7 @@ object SingleWeather: WeatherDestination {
     override val route: String = "single_weather"
 
     const val latLngArg = "lat_lng"
-    val routhWihArgs = "$route/${latLngArg}"
+    val routhWihArgs = "$route/$latLngArg"
     val arguments = listOf(
         navArgument(latLngArg) { type = NavType.StringType }
     )

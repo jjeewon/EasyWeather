@@ -1,16 +1,22 @@
-package com.example.easyweather
+package com.example.easyweather.navigation
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.presentation.weather.viewmodel.WeatherViewModel
+import com.example.ui.weather.WeatherScreen
 
+
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun WeatherNavHost(
     navController: NavHostController,
     modifier: Modifier,
+    weatherViewModel: WeatherViewModel,
 ) {
     NavHost(
         navController = navController,
@@ -18,7 +24,7 @@ fun WeatherNavHost(
         modifier = modifier,
     ) {
         composable(route = OverView.route) {
-            // screen
+            WeatherScreen(viewModel = weatherViewModel)
         }
         composable(route = Favorite.route) {
             // screen

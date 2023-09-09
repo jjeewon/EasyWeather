@@ -1,4 +1,4 @@
-package com.example.easyweather
+package com.example.easyweather.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -8,12 +8,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.easyweather.ui.component.WeatherTabRow
-import com.example.easyweather.ui.theme.WeatherTheme
+import com.example.presentation.weather.viewmodel.WeatherViewModel
+import com.example.ui.theme.WeatherTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WeatherApp() {
+fun WeatherApp(
+    weatherViewModel: WeatherViewModel,
+) {
     WeatherTheme {
         val navController = rememberNavController()
         val currentBackStack by navController.currentBackStackEntryAsState()
@@ -22,7 +24,7 @@ fun WeatherApp() {
             weatherTabRowScreens.find { it.route == currentDestination?.route } ?: OverView
 
         Scaffold(
-            topBar = {
+            bottomBar = {
                 WeatherTabRow(
                     allScreens = weatherTabRowScreens,
                     onTabSelected = { newScreen ->
@@ -34,7 +36,8 @@ fun WeatherApp() {
         ) { innerPadding ->
             WeatherNavHost(
                 navController = navController,
-                modifier = Modifier.padding(innerPadding)
+                modifier = Modifier.padding(innerPadding),
+                weatherViewModel,
             )
         }
     }

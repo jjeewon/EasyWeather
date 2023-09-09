@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace 'com.example.easyweather'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.easyweather"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -58,6 +58,7 @@ dependencies {
     implementation project(":data")
     implementation project(":datasource")
     implementation project(":presentation")
+    implementation project(":ui")
 
     implementation 'com.google.android.gms:play-services-location:21.0.1'
 

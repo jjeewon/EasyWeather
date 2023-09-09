@@ -1,4 +1,4 @@
-package com.example.easyweather.ui.weather
+package com.example.ui.weather
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

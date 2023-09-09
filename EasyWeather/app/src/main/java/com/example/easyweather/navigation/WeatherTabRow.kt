@@ -1,4 +1,4 @@
-package com.example.easyweather.ui.component
+package com.example.easyweather.navigation
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
@@ -29,7 +29,6 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.easyweather.WeatherDestination
 
 @Composable
 fun WeatherTabRow(
