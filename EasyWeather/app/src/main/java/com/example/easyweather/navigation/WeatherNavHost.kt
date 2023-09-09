@@ -8,8 +8,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.presentation.weather.viewmodel.WeatherViewModel
+import com.example.presentation.weatherdetail.viewmodel.WeatherDetailViewModel
 import com.example.ui.weather.WeatherScreen
-
+import com.example.ui.weatherdetail.WeatherDetailScreen
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -17,6 +18,7 @@ fun WeatherNavHost(
     navController: NavHostController,
     modifier: Modifier,
     weatherViewModel: WeatherViewModel,
+    weatherDetailViewModel: WeatherDetailViewModel,
 ) {
     NavHost(
         navController = navController,
@@ -24,18 +26,24 @@ fun WeatherNavHost(
         modifier = modifier,
     ) {
         composable(route = OverView.route) {
-            WeatherScreen(viewModel = weatherViewModel)
+            WeatherScreen(
+                viewModel = weatherViewModel,
+                onWeatherClicked = { navController.navigateToSingleWeather(it) }
+            )
         }
         composable(route = Favorite.route) {
             // screen
         }
         composable(
-            route = SingleWeather.routhWihArgs,
+            route = SingleWeather.routeWithArgs,
             arguments = SingleWeather.arguments,
             deepLinks = SingleWeather.deepLinks
         ) { navBackStackEntry ->
             val latLng = navBackStackEntry.arguments?.getString(SingleWeather.latLngArg)
-            // SingleWeatherScreen(latLng)
+            WeatherDetailScreen(
+                viewModel = weatherDetailViewModel,
+                latLng = latLng
+            )
         }
     }
 }
@@ -52,5 +60,13 @@ fun NavHostController.navigateSingleTopTo(route: String) =
     }
 
 fun NavHostController.navigateToSingleWeather(latLng: String) {
-    this.navigateSingleTopTo("${SingleWeather.route}/$latLng")
+    this.navigate("${SingleWeather.route}/$latLng") {
+        popUpTo(
+            this@navigateToSingleWeather.graph.findStartDestination().id
+        ) {
+            saveState = true
+        }
+        launchSingleTop = true
+        restoreState = false
+    }
 }

@@ -30,14 +30,16 @@ object SingleWeather: WeatherDestination {
     override val route: String = "single_weather"
 
     const val latLngArg = "lat_lng"
-    val routhWihArgs = "$route/$latLngArg"
+    val routeWithArgs = "$route/{$latLngArg}"
     val arguments = listOf(
-        navArgument(latLngArg) { type = NavType.StringType }
+        navArgument(latLngArg) {
+            type = NavType.StringType
+            nullable = true
+        }
     )
     val deepLinks = listOf(
-        navDeepLink { uriPattern = "weather://$routhWihArgs/{$latLngArg}" }
+        navDeepLink { uriPattern = "weather://$route/{$latLngArg}" }
     )
-
 }
 
 val weatherTabRowScreens = listOf(OverView, Favorite)

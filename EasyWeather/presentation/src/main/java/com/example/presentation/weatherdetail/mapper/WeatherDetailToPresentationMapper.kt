@@ -1,17 +1,17 @@
-package com.example.data.weather.mapper
+package com.example.presentation.weatherdetail.mapper
 
-import com.example.data.weather.model.WeatherDataModel
 import com.example.domains.weather.model.WeatherDomainModel
+import com.example.presentation.weatherdetail.model.WeatherDetailPresentationModel
 
-class WeatherDataToDomainMapper {
-    fun toDomain(input: WeatherDataModel) = WeatherDomainModel(
+class WeatherDetailToPresentationMapper {
+    fun toPresentation(input: WeatherDomainModel) = WeatherDetailPresentationModel(
         name = input.name,
         region = input.region,
         tempC = input.tempC,
         tempF = input.tempF,
         humidity = input.humidity,
         condition = input.condition,
-        conditionIcon = "https:${input.conditionIcon}",
+        conditionIcon = input.conditionIcon,
         windMph = input.windMph,
         windKph = input.windKph,
         windDegree = input.windDegree,

@@ -1,30 +1,30 @@
-package com.example.ui.weather
+package com.example.ui.weatherdetail
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.example.presentation.weather.model.WeatherOverViewUiState
-import com.example.presentation.weather.viewmodel.WeatherViewModel
+import com.example.presentation.weatherdetail.viewmodel.WeatherDetailViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WeatherScreen(
-    viewModel: WeatherViewModel,
-    onWeatherClicked: (String) -> Unit,
+fun WeatherDetailScreen(
+    viewModel: WeatherDetailViewModel,
+    latLng: String?,
 ){
+    LaunchedEffect(key1 = latLng) {
+        viewModel.getWeatherFromLocation(latLng)
+    }
     val uiState by viewModel.uiState.collectAsState()
     Scaffold { paddingValues ->
-        WeatherContent(
+        WeatherDetailContent(
             modifier = Modifier
                 .padding(paddingValues),
-            weatherOverViewUiState = uiState.weatherOverViewUiState,
-            onWeatherClicked = { onWeatherClicked.invoke(
-                uiState.lastLng
-            ) }
+            weatherDetailUiState = uiState.weatherCardUiState
         )
     }
 

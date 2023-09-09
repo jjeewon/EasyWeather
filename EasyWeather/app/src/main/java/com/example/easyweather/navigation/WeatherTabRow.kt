@@ -29,21 +29,25 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.example.easyweather.navigation.WeatherDestination
 
 @Composable
 fun WeatherTabRow(
+    modifier: Modifier = Modifier,
     allScreens: List<WeatherDestination>,
     onTabSelected: (WeatherDestination) -> Unit,
     currentScreen: WeatherDestination
 ) {
+    val weight = (1.0/allScreens.size).toFloat()
     Surface(
-        Modifier
+        modifier
             .height(TabHeight)
             .fillMaxWidth()
     ) {
         Row(Modifier.selectableGroup()) {
             allScreens.forEach { screen ->
                 WeatherTab(
+                    modifier = modifier.weight(weight),
                     text = screen.route,
                     icon = screen.icon,
                     onSelected = { onTabSelected(screen) },
@@ -56,6 +60,7 @@ fun WeatherTabRow(
 
 @Composable
 private fun WeatherTab(
+    modifier: Modifier,
     text: String,
     icon: ImageVector,
     onSelected: () -> Unit,
@@ -75,7 +80,7 @@ private fun WeatherTab(
         animationSpec = animSpec
     )
     Row(
-        modifier = Modifier
+        modifier = modifier
             .padding(16.dp)
             .animateContentSize()
             .height(TabHeight)

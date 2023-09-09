@@ -1,12 +1,11 @@
 package com.example.presentation.weather.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.domains.architecture.usecase.UseCaseExecutor
 import com.example.domains.weather.usecase.GetWeatherUseCase
 import com.example.presentation.architecture.viewmodel.BaseViewModel
 import com.example.presentation.weather.mapper.WeatherDomainToPresentationMapper
-import com.example.presentation.weather.model.WeatherDetailUiState
+import com.example.presentation.weather.model.WeatherOverViewUiState
 import com.example.presentation.weather.model.WeatherUiState
 import kotlinx.coroutines.launch
 
@@ -27,7 +26,7 @@ class WeatherViewModel(
                 lat = lat,
                 lng = lng,
             )))
-            val weatherDetailUiState = WeatherDetailUiState.Visible(
+            val weatherOverViewUiState = WeatherOverViewUiState.Visible(
                 name = result.name,
                 region = result.region,
                 temp = result.tempC.toString(),
@@ -38,7 +37,8 @@ class WeatherViewModel(
             updateUiState {
                 this.copy(
                     isLoading = false,
-                    weatherDetailUiState = weatherDetailUiState
+                    weatherOverViewUiState = weatherOverViewUiState,
+                    lastLng = "${lat}_${lng}"
                 )
             }
         }

@@ -2,15 +2,17 @@ package com.example.ui.weather
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.presentation.weather.model.WeatherDetailUiState
+import com.example.presentation.weather.model.WeatherOverViewUiState
 
 @Composable
 fun WeatherContent(
     modifier: Modifier = Modifier,
-    weatherDetailUiState: WeatherDetailUiState,
+    weatherOverViewUiState: WeatherOverViewUiState,
+    onWeatherClicked: () -> Unit
 ){
-    WeatherDetailCard(
+    WeatherCard(
         modifier = modifier,
-        uiState = weatherDetailUiState
+        uiState = weatherOverViewUiState,
+        onWeatherClicked = onWeatherClicked,
     )
 }

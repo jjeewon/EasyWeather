@@ -5,7 +5,7 @@ import com.example.domains.architecture.usecase.UseCaseExecutor
 import com.example.domains.weather.model.WeatherDomainModel
 import com.example.domains.weather.usecase.GetWeatherUseCase
 import com.example.presentation.weather.mapper.WeatherDomainToPresentationMapper
-import com.example.presentation.weather.model.WeatherDetailUiState
+import com.example.presentation.weather.model.WeatherOverViewUiState
 import com.example.presentation.weather.model.WeatherUiState
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -45,7 +45,7 @@ class WeatherViewModelTest {
         viewModel.uiState.test {
             assertEquals(WeatherUiState(
                 isLoading = false,
-                weatherDetailUiState = FAKE_WEATHER_DETAIL_UI_STATE
+                weatherOverViewUiState = FAKE_WEATHER_DETAIL_UI_STATE
             ), awaitItem())
         }
     }
@@ -70,7 +70,7 @@ class WeatherViewModelTest {
             conditionIcon= FAKE_CONDITION_ICON
         )
 
-        private val FAKE_WEATHER_DETAIL_UI_STATE =  WeatherDetailUiState.Visible(
+        private val FAKE_WEATHER_DETAIL_UI_STATE =  WeatherOverViewUiState.Visible(
             name= FAKE_NAME,
             region= FAKE_REGION,
             temp= FAKE_TEMP.toString(),

@@ -9,12 +9,14 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.presentation.weather.viewmodel.WeatherViewModel
+import com.example.presentation.weatherdetail.viewmodel.WeatherDetailViewModel
 import com.example.ui.theme.WeatherTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WeatherApp(
     weatherViewModel: WeatherViewModel,
+    weatherDetailViewModel: WeatherDetailViewModel,
 ) {
     WeatherTheme {
         val navController = rememberNavController()
@@ -38,6 +40,7 @@ fun WeatherApp(
                 navController = navController,
                 modifier = Modifier.padding(innerPadding),
                 weatherViewModel,
+                weatherDetailViewModel,
             )
         }
     }

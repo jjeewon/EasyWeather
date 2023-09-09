@@ -2,6 +2,7 @@ package com.example.ui.weather
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
@@ -17,21 +18,23 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
-import com.example.presentation.weather.model.WeatherDetailUiState
+import com.example.presentation.weather.model.WeatherOverViewUiState
 
 @Composable
-fun WeatherDetailCard(
+fun WeatherCard(
     modifier: Modifier,
-    uiState: WeatherDetailUiState,
+    uiState: WeatherOverViewUiState,
+    onWeatherClicked: () -> Unit
 ) {
-    if (uiState !is WeatherDetailUiState.Visible) return
+    if (uiState !is WeatherOverViewUiState.Visible) return
     Column(
         modifier = modifier
             .background(
                 color = Color.Gray,
                 shape = RoundedCornerShape(5.dp)
             )
-            .padding(10.dp),
+            .padding(10.dp)
+            .clickable { onWeatherClicked.invoke() },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         LoadImageFromUrl(

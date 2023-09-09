@@ -1,6 +1,6 @@
-package com.example.domains.weather.model
+package com.example.presentation.weatherdetail.model
 
-data class WeatherDomainModel(
+data class WeatherDetailPresentationModel(
     val name: String,
     val region: String,
     val tempC: Double,

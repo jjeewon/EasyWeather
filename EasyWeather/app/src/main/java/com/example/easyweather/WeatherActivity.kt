@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import com.example.easyweather.navigation.WeatherApp
 import com.example.presentation.weather.viewmodel.WeatherViewModel
+import com.example.presentation.weatherdetail.viewmodel.WeatherDetailViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -23,13 +24,19 @@ class WeatherActivity : ComponentActivity() {
     @Inject
     lateinit var viewModel: WeatherViewModel
 
+    @Inject
+    lateinit var weatherDetailViewModel: WeatherDetailViewModel
+
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            WeatherApp(viewModel)
+            WeatherApp(
+                viewModel,
+                weatherDetailViewModel
+            )
         }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
