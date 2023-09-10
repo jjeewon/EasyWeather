@@ -5,7 +5,7 @@ import com.example.datasource.weather.model.WeatherApiResponse
 
 class WeatherToDataMapper {
     fun toData(res: WeatherApiResponse) = WeatherDataModel(
-        lastUpdated = res.current.lastUpdated,
+        lastUpdated = res.current.lastUpdatedEpoch,
         name = res.location.name,
         region = res.location.region,
         tempC = res.current.tempC,

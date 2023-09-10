@@ -1,7 +1,7 @@
 package com.example.data.weather.model
 
 data class WeatherDataModel (
-    val lastUpdated: String,
+    val lastUpdated: Long,
     val name: String,
     val region: String,
     val tempC: Double,

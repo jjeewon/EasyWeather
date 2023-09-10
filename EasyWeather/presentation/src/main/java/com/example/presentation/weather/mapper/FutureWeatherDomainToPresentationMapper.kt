@@ -3,6 +3,8 @@ package com.example.presentation.weather.mapper
 import com.example.domains.weather.model.FutureWeatherDomainModel
 import com.example.presentation.weather.model.FutureWeatherPresentationModel
 import com.example.presentation.weather.model.HourPresentationModel
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class FutureWeatherDomainToPresentationMapper {
     fun toPresentation(input: List<FutureWeatherDomainModel>): List<FutureWeatherPresentationModel> {
@@ -27,8 +29,11 @@ class FutureWeatherDomainToPresentationMapper {
                     willItSnow = it.willItSnow,
                 )
             }
+            val currentDate = LocalDate.parse(model.date)
+            val formatter = DateTimeFormatter.ofPattern("MMMM dd")
+            val date = currentDate.format(formatter)
             FutureWeatherPresentationModel(
-                date = model.date,
+                date = date,
                 maxTempC = model.maxTempC,
                 maxTempF = model.maxTempF,
                 minTempC = model.minTempC,

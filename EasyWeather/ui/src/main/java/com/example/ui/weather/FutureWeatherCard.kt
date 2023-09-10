@@ -43,56 +43,26 @@ fun FutureWeatherCard(
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold
             )
-            FutureWeatherCardItem(
+            WeatherItem(
                 title = "average temp",
                 desc = item.avgTempC.toString(),
                 unit = "°C"
             )
-            FutureWeatherCardItem(
+            WeatherItem(
                 title = "minimum temp",
                 desc = item.minTempC.toString(),
                 unit = "°C"
             )
-            FutureWeatherCardItem(
+            WeatherItem(
                 title = "maximum temp",
                 desc = item.maxTempC.toString(),
                 unit = "°C"
             )
-            FutureWeatherCardItem(
+            WeatherItem(
                 title = "average humidity",
                 desc = item.avgHumidity.toString(),
                 unit = "%"
             )
         }
-    }
-}
-
-@Composable
-fun FutureWeatherCardItem(
-    title: String,
-    desc: String,
-    unit: String,
-) {
-    Row(
-        modifier = Modifier.padding(vertical = 2.dp)
-    ) {
-        Text(
-            modifier = Modifier
-                .background(color = Color.LightGray, shape = RoundedCornerShape(6.dp))
-                .padding(6.dp),
-            text = title,
-            fontWeight = FontWeight.W500,
-            fontFamily = FontFamily.Serif,
-        )
-        Text(
-            modifier = Modifier.padding(start = 10.dp, top = 6.dp, bottom = 6.dp),
-            text = desc,
-            fontWeight = FontWeight.ExtraBold
-        )
-        Text(
-            text = unit,
-            modifier = Modifier
-                .padding(vertical = 6.dp),
-        )
     }
 }

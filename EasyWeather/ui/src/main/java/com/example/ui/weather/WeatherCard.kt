@@ -31,7 +31,7 @@ fun WeatherCard(
 ) {
     Card(
         modifier = modifier.padding(top = 30.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)
     ) {
         Column(
             modifier = modifier
