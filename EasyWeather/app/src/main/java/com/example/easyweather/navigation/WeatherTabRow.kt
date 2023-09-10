@@ -3,6 +3,7 @@ package com.example.easyweather.navigation
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Row
@@ -30,6 +31,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.easyweather.navigation.WeatherDestination
+import com.example.ui.theme.dpTextUnit
 
 @Composable
 fun WeatherTabRow(
@@ -99,8 +101,8 @@ private fun WeatherTab(
     ) {
         Icon(imageVector = icon, contentDescription = text, tint = tabTintColor)
         if (selected) {
-            Spacer(Modifier.width(12.dp))
-            Text(text.uppercase(), color = tabTintColor)
+            Spacer(Modifier.width(5.dp))
+            Text(text.uppercase(), color = tabTintColor, fontSize = 14.dpTextUnit)
         }
     }
 }

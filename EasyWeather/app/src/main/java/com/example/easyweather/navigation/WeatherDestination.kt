@@ -3,7 +3,9 @@ package com.example.easyweather.navigation
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
@@ -15,8 +17,13 @@ interface WeatherDestination {
 }
 
 object OverView: WeatherDestination {
-    override val icon: ImageVector = Icons.Default.Call
+    override val icon: ImageVector = Icons.Default.Face
     override val route: String = "overview"
+}
+
+object Search: WeatherDestination {
+    override val icon: ImageVector = Icons.Default.Search
+    override val route: String = "search"
 }
 
 object Favorite: WeatherDestination {
@@ -42,4 +49,4 @@ object SingleWeather: WeatherDestination {
     )
 }
 
-val weatherTabRowScreens = listOf(OverView, Favorite)
+val weatherTabRowScreens = listOf(OverView, Search, Favorite)

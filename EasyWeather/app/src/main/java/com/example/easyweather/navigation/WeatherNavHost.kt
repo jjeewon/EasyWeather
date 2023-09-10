@@ -31,6 +31,9 @@ fun WeatherNavHost(
                 onWeatherClicked = { navController.navigateToSingleWeather(it) }
             )
         }
+        composable(route = Search.route) {
+
+        }
         composable(route = Favorite.route) {
             // screen
         }
