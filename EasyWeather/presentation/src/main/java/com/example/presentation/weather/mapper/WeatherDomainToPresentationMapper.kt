@@ -5,6 +5,7 @@ import com.example.presentation.weather.model.WeatherPresentationModel
 
 class WeatherDomainToPresentationMapper {
     fun toPresentation(input: WeatherDomainModel) = WeatherPresentationModel(
+        lastUpdated = input.lastUpdated,
         name = input.name,
         region = input.region,
         tempC = input.tempC,

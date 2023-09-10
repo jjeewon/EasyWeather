@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.example.presentation.weather.model.WeatherOverViewUiState
 import com.example.presentation.weather.viewmodel.WeatherViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -21,7 +20,10 @@ fun WeatherScreen(
         WeatherContent(
             modifier = Modifier
                 .padding(paddingValues),
+            currentLoc = uiState.currentLoc,
+            lastUpdatedTime = uiState.lastUpdatedTime,
             weatherOverViewUiState = uiState.weatherOverViewUiState,
+            futureWeatherUiState = uiState.futureWeatherUiState,
             onWeatherClicked = { onWeatherClicked.invoke(
                 uiState.lastLng
             ) }

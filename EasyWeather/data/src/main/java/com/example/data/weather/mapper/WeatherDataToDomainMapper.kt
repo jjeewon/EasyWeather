@@ -5,6 +5,7 @@ import com.example.domains.weather.model.WeatherDomainModel
 
 class WeatherDataToDomainMapper {
     fun toDomain(input: WeatherDataModel) = WeatherDomainModel(
+        lastUpdated = input.lastUpdated,
         name = input.name,
         region = input.region,
         tempC = input.tempC,

@@ -1,6 +1,7 @@
 package com.example.domains.weather.model
 
 data class WeatherDomainModel(
+    val lastUpdated: String,
     val name: String,
     val region: String,
     val tempC: Double,

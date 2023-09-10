@@ -5,9 +5,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,30 +26,34 @@ import com.example.presentation.weather.model.WeatherOverViewUiState
 @Composable
 fun WeatherCard(
     modifier: Modifier,
-    uiState: WeatherOverViewUiState,
+    uiState: WeatherOverViewUiState.Visible,
     onWeatherClicked: () -> Unit
 ) {
-    if (uiState !is WeatherOverViewUiState.Visible) return
-    Column(
-        modifier = modifier
-            .background(
-                color = Color.Gray,
-                shape = RoundedCornerShape(5.dp)
-            )
-            .padding(10.dp)
-            .clickable { onWeatherClicked.invoke() },
-        horizontalAlignment = Alignment.CenterHorizontally
+    Card(
+        modifier = modifier.padding(top = 30.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
     ) {
-        LoadImageFromUrl(
-            modifier = modifier,
-            url = uiState.conditionIcon
-        )
-        Text(uiState.name)
-        Text(uiState.region)
-        Text(uiState.temp)
-        Text(uiState.humidity)
-        Text(uiState.condition)
+        Column(
+            modifier = modifier
+                .background(
+                    color = Color.Gray,
+                    shape = RoundedCornerShape(10.dp)
+                )
+                .padding(10.dp)
+                .clickable { onWeatherClicked.invoke() },
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            LoadImageFromUrl(
+                modifier = modifier,
+                url = uiState.conditionIcon
+            )
+            Text(uiState.region)
+            Text(uiState.temp)
+            Text(uiState.humidity)
+            Text(uiState.condition)
+        }
     }
+
 }
 
 @Composable
@@ -61,11 +68,13 @@ fun LoadImageFromUrl(
     Image(
         painter = painter,
         contentDescription = null,
-        modifier = modifier.background(
+        modifier = modifier
+            .background(
                 color = Color.White,
-        shape = CircleShape
-    )
-        .padding(10.dp).wrapContentSize(),
+                shape = CircleShape
+            )
+            .padding(10.dp)
+            .wrapContentSize(),
         contentScale = ContentScale.Crop
     )
 }

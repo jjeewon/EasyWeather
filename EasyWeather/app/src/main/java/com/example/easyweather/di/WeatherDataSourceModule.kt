@@ -3,6 +3,7 @@ package com.example.easyweather.di
 import com.example.data.weather.datasource.WeatherDataSource
 import com.example.datasource.WeatherApi
 import com.example.datasource.weather.datasource.WeatherDataSourceImpl
+import com.example.datasource.weather.mapper.FutureWeatherToDataMapper
 import com.example.datasource.weather.mapper.WeatherToDataMapper
 import dagger.Module
 import dagger.Provides
@@ -21,14 +22,19 @@ object WeatherDataSourceModule {
     }
 
     @Provides
-    fun providesIWeatherToDataMapper() = WeatherToDataMapper()
+    fun providesWeatherToDataMapper() = WeatherToDataMapper()
+
+    @Provides
+    fun providesFutureWeatherToDataMapper() = FutureWeatherToDataMapper()
 
     @Provides
     fun providesWeatherDataSource(
         weatherApi: WeatherApi,
-        weatherToDataMapper: WeatherToDataMapper
+        weatherToDataMapper: WeatherToDataMapper,
+        futureWeatherToDataMapper: FutureWeatherToDataMapper,
     ): WeatherDataSource = WeatherDataSourceImpl(
         weatherApi,
-        weatherToDataMapper
+        weatherToDataMapper,
+        futureWeatherToDataMapper
     )
 }

@@ -1,6 +1,7 @@
 package com.example.presentation.weather.model
 
 data class WeatherPresentationModel(
+    val lastUpdated: String,
     val name: String,
     val region: String,
     val tempC: Double,
