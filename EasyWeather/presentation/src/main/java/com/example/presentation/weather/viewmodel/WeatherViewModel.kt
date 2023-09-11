@@ -21,7 +21,7 @@ class WeatherViewModel(
     private val weatherDomainToPresentationMapper: WeatherDomainToPresentationMapper,
     private val futureWeatherDomainToPresentationMapper: FutureWeatherDomainToPresentationMapper,
     useCaseExecutor: UseCaseExecutor,
-): BaseViewModel<WeatherUiState>(useCaseExecutor) {
+) : BaseViewModel<WeatherUiState>(useCaseExecutor) {
 
     private var currentLatLng: Pair<Double, Double> = 0.0 to 0.0
     override fun initialState(): WeatherUiState = WeatherUiState()
@@ -42,27 +42,33 @@ class WeatherViewModel(
 
     private fun getCurrentWeather(lat: Double, lng: Double) {
         viewModelScope.launch {
-            val resultWeather = weatherDomainToPresentationMapper.toPresentation(getWeatherUseCase.executeInBackground(GetWeatherUseCase.Param.LatLng(
-                lat = lat,
-                lng = lng,
-            )))
+            getWeatherUseCase.run(
+                value = GetWeatherUseCase.Param.LatLng(
+                    lat = lat,
+                    lng = lng,
+                ),
+                onResult = {
+                    val result = weatherDomainToPresentationMapper.toPresentation(it)
+                    val weatherOverViewUiState = WeatherOverViewUiState.Visible(
+                        region = result.region,
+                        temp = result.tempC.toString(),
+                        humidity = result.humidity.toString(),
+                        condition = result.condition,
+                        conditionIcon = result.conditionIcon
+                    )
+                    updateUiState {
+                        this.copy(
+                            isLoading = false,
+                            currentLoc = result.name,
+                            lastUpdatedTime = result.lastUpdated,
+                            weatherOverViewUiState = weatherOverViewUiState,
+                            lastLng = "${lat}_${lng}"
+                        )
+                    }
 
-            val weatherOverViewUiState = WeatherOverViewUiState.Visible(
-                region = resultWeather.region,
-                temp = resultWeather.tempC.toString(),
-                humidity = resultWeather.humidity.toString(),
-                condition = resultWeather.condition,
-                conditionIcon = resultWeather.conditionIcon
+                },
+                onException = {}
             )
-            updateUiState {
-                this.copy(
-                    isLoading = false,
-                    currentLoc = resultWeather.name,
-                    lastUpdatedTime = resultWeather.lastUpdated,
-                    weatherOverViewUiState = weatherOverViewUiState,
-                    lastLng = "${lat}_${lng}"
-                )
-            }
         }
     }
 
@@ -71,21 +77,28 @@ class WeatherViewModel(
             val currentDate = LocalDate.now().plusDays(15)
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
             val datList = (1..6).map { currentDate.plusDays(it.toLong()).format(formatter) }
-            val result = futureWeatherDomainToPresentationMapper.toPresentation(getFutureWeatherUseCase.executeInBackground(GetFutureWeatherUseCase.Param(
-                datList = datList,
-                location = GetFutureWeatherUseCase.Location.LatLng(
-                    lat = lat,
-                    lng = lng,
-                )
-            )))
-            updateUiState {
-                this.copy(
-                    isLoading = false,
-                    futureWeatherUiState = FutureWeatherUiState.Visible(
-                        futureWeatherList = result
+
+            getFutureWeatherUseCase.run(
+                value = GetFutureWeatherUseCase.Param(
+                    datList = datList,
+                    location = GetFutureWeatherUseCase.Location.LatLng(
+                        lat = lat,
+                        lng = lng,
                     )
-                )
-            }
+                ),
+                onResult = {
+                    val result = futureWeatherDomainToPresentationMapper.toPresentation(it)
+                    updateUiState {
+                        this.copy(
+                            isLoading = false,
+                            futureWeatherUiState = FutureWeatherUiState.Visible(
+                                futureWeatherList = result
+                            )
+                        )
+                    }
+                },
+                onException = {}
+            )
         }
     }
 }
