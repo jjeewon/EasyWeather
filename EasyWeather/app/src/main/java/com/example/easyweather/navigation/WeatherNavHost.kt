@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.presentation.weather.viewmodel.WeatherViewModel
 import com.example.presentation.weatherdetail.viewmodel.WeatherDetailViewModel
+import com.example.ui.search.SearchScreen
 import com.example.ui.weather.WeatherScreen
 import com.example.ui.weatherdetail.WeatherDetailScreen
 
@@ -32,7 +33,7 @@ fun WeatherNavHost(
             )
         }
         composable(route = Search.route) {
-
+            SearchScreen()
         }
         composable(route = Favorite.route) {
             // screen
