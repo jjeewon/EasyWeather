@@ -25,13 +25,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.presentation.search.model.LocationPresentationModel
 
 @Composable
 fun SearchContent(
     modifier: Modifier,
-    itemList: List<String>,
+    itemList: List<LocationPresentationModel>,
     onQueryChange: (String) -> Unit,
-    onItemSelected: (String) -> Unit,
+    onItemSelected: (LocationPresentationModel) -> Unit,
 ){
     Column() {
         SearchBar(
@@ -51,13 +52,13 @@ fun SearchContent(
 @Composable
 fun SearchDropDown(
     modifier: Modifier,
-    itemList: List<String>,
-    onItemSelected: (String) -> Unit,
+    itemList: List<LocationPresentationModel>,
+    onItemSelected: (LocationPresentationModel) -> Unit,
 ) {
     LazyColumn(modifier.padding(top = 5.dp)) {
         items(itemList) { item ->
             Text(
-                text = item,
+                text = item.location,
                 modifier = Modifier.clickable { onItemSelected.invoke(item) }
             )
         }

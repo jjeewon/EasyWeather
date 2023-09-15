@@ -1,6 +1,7 @@
 package com.example.datasource
 
 import com.example.datasource.weather.model.FutureWeatherApiResponse
+import com.example.datasource.weather.model.LocationModel
 import com.example.datasource.weather.model.WeatherApiResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -17,4 +18,9 @@ interface WeatherApi {
         @Query("q") q: String,
         @Query("dt") dt: String,
     ): FutureWeatherApiResponse
+
+    @GET("/v1/search.json")
+    suspend fun getAutoCompleteResult(
+        @Query("q") q: String,
+    ): List<LocationModel>
 }

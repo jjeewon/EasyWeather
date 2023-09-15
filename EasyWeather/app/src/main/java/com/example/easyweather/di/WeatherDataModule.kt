@@ -2,6 +2,7 @@ package com.example.easyweather.di
 
 import com.example.data.weather.datasource.WeatherDataSource
 import com.example.data.weather.mapper.FutureWeatherDataToDomainMapper
+import com.example.data.weather.mapper.LocationAutoCompleteDataToDomainMapper
 import com.example.data.weather.mapper.WeatherDataToDomainMapper
 import com.example.data.weather.repository.WeatherLiveRepository
 import com.example.domains.weather.repository.WeatherRepository
@@ -23,17 +24,23 @@ abstract class WeatherDataModule {
         fun providesFutureWeatherDataToDomainMapper() =
             FutureWeatherDataToDomainMapper()
 
+        @Provides
+        fun providesLocationAutoCompleteDataToDomainMapper() =
+            LocationAutoCompleteDataToDomainMapper()
+
         @Singleton
         @Provides
         fun provideWeatherRepository(
             weatherDataSource: WeatherDataSource,
             weatherDataToDomainMapper: WeatherDataToDomainMapper,
             futureWeatherDataToDomainMapper: FutureWeatherDataToDomainMapper,
+            locationAutoCompleteDataToDomainMapper: LocationAutoCompleteDataToDomainMapper,
         ): WeatherRepository {
             return WeatherLiveRepository(
                 weatherDataSource = weatherDataSource,
                 weatherDataToDomainMapper = weatherDataToDomainMapper,
                 futureWeatherDataToDomainMapper = futureWeatherDataToDomainMapper,
+                locationAutoCompleteDataToDomainMapper = locationAutoCompleteDataToDomainMapper,
             )
         }
     }

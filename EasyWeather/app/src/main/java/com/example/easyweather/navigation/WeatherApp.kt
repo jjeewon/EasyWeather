@@ -8,6 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.presentation.search.viewmodel.SearchViewModel
 import com.example.presentation.weather.viewmodel.WeatherViewModel
 import com.example.presentation.weatherdetail.viewmodel.WeatherDetailViewModel
 import com.example.ui.theme.WeatherTheme
@@ -17,6 +18,7 @@ import com.example.ui.theme.WeatherTheme
 fun WeatherApp(
     weatherViewModel: WeatherViewModel,
     weatherDetailViewModel: WeatherDetailViewModel,
+    searchViewModel: SearchViewModel,
 ) {
     WeatherTheme {
         val navController = rememberNavController()
@@ -41,6 +43,7 @@ fun WeatherApp(
                 modifier = Modifier.padding(innerPadding),
                 weatherViewModel,
                 weatherDetailViewModel,
+                searchViewModel,
             )
         }
     }

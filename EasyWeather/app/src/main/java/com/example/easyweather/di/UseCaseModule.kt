@@ -3,6 +3,7 @@ package com.example.easyweather.di
 import com.example.domains.architecture.coroutine.CoroutineContextProvider
 import com.example.domains.weather.repository.WeatherRepository
 import com.example.domains.weather.usecase.GetFutureWeatherUseCase
+import com.example.domains.weather.usecase.GetLocationAutoCompleteUseCase
 import com.example.domains.weather.usecase.GetWeatherUseCase
 import dagger.Module
 import dagger.Provides
@@ -26,4 +27,11 @@ object UseCaseModule {
         weatherRepository: WeatherRepository,
     ): GetFutureWeatherUseCase =
         GetFutureWeatherUseCase(coroutineContextProvider, weatherRepository)
+
+    @Provides
+    fun providesGetLocationAutoCompleteUseCase(
+        coroutineContextProvider: CoroutineContextProvider,
+        weatherRepository: WeatherRepository,
+    ): GetLocationAutoCompleteUseCase =
+        GetLocationAutoCompleteUseCase(coroutineContextProvider, weatherRepository)
 }

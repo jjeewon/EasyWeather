@@ -2,7 +2,10 @@ package com.example.easyweather.di
 
 import com.example.domains.architecture.usecase.UseCaseExecutor
 import com.example.domains.weather.usecase.GetFutureWeatherUseCase
+import com.example.domains.weather.usecase.GetLocationAutoCompleteUseCase
 import com.example.domains.weather.usecase.GetWeatherUseCase
+import com.example.presentation.search.mapper.AutoCompleteDomainToPresentationMapper
+import com.example.presentation.search.viewmodel.SearchViewModel
 import com.example.presentation.weather.mapper.FutureWeatherDomainToPresentationMapper
 import com.example.presentation.weather.mapper.WeatherDomainToPresentationMapper
 import com.example.presentation.weather.viewmodel.WeatherViewModel
@@ -49,6 +52,20 @@ object WeatherPresentationModule {
     ) = WeatherDetailViewModel(
         getWeatherUseCase,
         weatherDetailToPresentationMapper,
+        useCaseExecutor,
+    )
+
+    @Provides
+    fun providesAutoCompleteDomainToPresentationMapper() = AutoCompleteDomainToPresentationMapper()
+
+    @Provides
+    fun providesSearchViewModel(
+        getLocationAutoCompleteUseCase: GetLocationAutoCompleteUseCase,
+        autoCompleteDomainToPresentationMapper: AutoCompleteDomainToPresentationMapper,
+        useCaseExecutor: UseCaseExecutor,
+    ) = SearchViewModel(
+        getLocationAutoCompleteUseCase,
+        autoCompleteDomainToPresentationMapper,
         useCaseExecutor,
     )
 }

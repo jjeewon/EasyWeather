@@ -4,21 +4,26 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import com.example.presentation.search.model.LocationPresentationModel
+import com.example.presentation.search.viewmodel.SearchViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchScreen(
-    itemList: List<String>,
-    onQueryChanged: (String) -> Unit,
-    onItemSelected: (String) -> Unit,
+    viewModel: SearchViewModel,
+    onItemSelected: (LocationPresentationModel) -> Unit,
 ){
+    val uiState by viewModel.uiState.collectAsState()
+
     Scaffold { paddingValues ->
        SearchContent(
            modifier = Modifier
                .padding(paddingValues),
-           itemList = itemList,
-           onQueryChange = onQueryChanged,
+           itemList = uiState.autoCompleteList,
+           onQueryChange = { viewModel.getLocationByQuery(it) },
            onItemSelected = onItemSelected,
        )
     }

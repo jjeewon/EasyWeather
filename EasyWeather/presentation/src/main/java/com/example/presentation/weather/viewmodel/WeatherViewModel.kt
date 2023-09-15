@@ -1,6 +1,5 @@
 package com.example.presentation.weather.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.domains.architecture.usecase.UseCaseExecutor
 import com.example.domains.weather.usecase.GetFutureWeatherUseCase

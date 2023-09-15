@@ -6,6 +6,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.presentation.search.viewmodel.SearchViewModel
 import com.example.presentation.weather.viewmodel.WeatherViewModel
 import com.example.presentation.weatherdetail.viewmodel.WeatherDetailViewModel
 import com.example.ui.search.SearchScreen
@@ -18,6 +19,7 @@ fun WeatherNavHost(
     modifier: Modifier,
     weatherViewModel: WeatherViewModel,
     weatherDetailViewModel: WeatherDetailViewModel,
+    searchViewModel: SearchViewModel,
 ) {
     NavHost(
         navController = navController,
@@ -32,8 +34,7 @@ fun WeatherNavHost(
         }
         composable(route = Search.route) {
             SearchScreen(
-                itemList = listOf(),
-                onQueryChanged = {},
+                viewModel = searchViewModel,
                 onItemSelected = {},
             )
         }

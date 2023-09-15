@@ -9,6 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import com.example.easyweather.navigation.WeatherApp
+import com.example.presentation.search.viewmodel.SearchViewModel
 import com.example.presentation.weather.viewmodel.WeatherViewModel
 import com.example.presentation.weatherdetail.viewmodel.WeatherDetailViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -27,6 +28,9 @@ class WeatherActivity : ComponentActivity() {
     @Inject
     lateinit var weatherDetailViewModel: WeatherDetailViewModel
 
+    @Inject
+    lateinit var searchViewModel: SearchViewModel
+
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +39,8 @@ class WeatherActivity : ComponentActivity() {
         setContent {
             WeatherApp(
                 viewModel,
-                weatherDetailViewModel
+                weatherDetailViewModel,
+                searchViewModel,
             )
         }
 

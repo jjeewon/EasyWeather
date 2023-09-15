@@ -4,6 +4,7 @@ import com.example.data.weather.datasource.WeatherDataSource
 import com.example.datasource.WeatherApi
 import com.example.datasource.weather.datasource.WeatherDataSourceImpl
 import com.example.datasource.weather.mapper.FutureWeatherToDataMapper
+import com.example.datasource.weather.mapper.LocationAutoCompleteToDataMapper
 import com.example.datasource.weather.mapper.WeatherToDataMapper
 import dagger.Module
 import dagger.Provides
@@ -28,13 +29,18 @@ object WeatherDataSourceModule {
     fun providesFutureWeatherToDataMapper() = FutureWeatherToDataMapper()
 
     @Provides
+    fun providesLocationAutoCompleteToDataMapper() = LocationAutoCompleteToDataMapper()
+
+    @Provides
     fun providesWeatherDataSource(
         weatherApi: WeatherApi,
         weatherToDataMapper: WeatherToDataMapper,
         futureWeatherToDataMapper: FutureWeatherToDataMapper,
+        locationAutoCompleteToDataMapper: LocationAutoCompleteToDataMapper,
     ): WeatherDataSource = WeatherDataSourceImpl(
         weatherApi,
         weatherToDataMapper,
-        futureWeatherToDataMapper
+        futureWeatherToDataMapper,
+        locationAutoCompleteToDataMapper
     )
 }
