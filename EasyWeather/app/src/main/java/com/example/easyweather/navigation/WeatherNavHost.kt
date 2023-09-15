@@ -33,7 +33,11 @@ fun WeatherNavHost(
             )
         }
         composable(route = Search.route) {
-            SearchScreen()
+            SearchScreen(
+                itemList = listOf(),
+                onQueryChanged = {},
+                onItemSelected = {},
+            )
         }
         composable(route = Favorite.route) {
             // screen
