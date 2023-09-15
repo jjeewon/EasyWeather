@@ -1,6 +1,5 @@
 package com.example.easyweather.navigation
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -13,7 +12,6 @@ import com.example.ui.search.SearchScreen
 import com.example.ui.weather.WeatherScreen
 import com.example.ui.weatherdetail.WeatherDetailScreen
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun WeatherNavHost(
     navController: NavHostController,
