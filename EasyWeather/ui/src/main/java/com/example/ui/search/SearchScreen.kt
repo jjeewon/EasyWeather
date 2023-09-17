@@ -14,7 +14,6 @@ import com.example.presentation.search.viewmodel.SearchViewModel
 @Composable
 fun SearchScreen(
     viewModel: SearchViewModel,
-    onItemSelected: (String) -> Unit,
 ){
     val uiState by viewModel.uiState.collectAsState()
 
@@ -23,10 +22,10 @@ fun SearchScreen(
            modifier = Modifier
                .padding(paddingValues),
            itemList = uiState.autoCompleteList,
+           searchWeatherUiState = uiState.searchWeatherUiState,
            onQueryChange = { viewModel.getLocationByQuery(it) },
            onItemSelected = {
-                val latLng = "${it.lat}_${it.lng}"
-               onItemSelected.invoke(latLng)
+               viewModel.onWeatherItemSelected(it)
             },
        )
     }

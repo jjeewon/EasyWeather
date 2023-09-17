@@ -35,7 +35,6 @@ fun WeatherNavHost(
         composable(route = Search.route) {
             SearchScreen(
                 viewModel = searchViewModel,
-                onItemSelected = {},
             )
         }
         composable(route = Favorite.route) {

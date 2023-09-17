@@ -62,10 +62,14 @@ object WeatherPresentationModule {
     fun providesSearchViewModel(
         getLocationAutoCompleteUseCase: GetLocationAutoCompleteUseCase,
         autoCompleteDomainToPresentationMapper: AutoCompleteDomainToPresentationMapper,
+        getWeatherUseCase: GetWeatherUseCase,
+        weatherDetailToPresentationMapper: WeatherDetailToPresentationMapper,
         useCaseExecutor: UseCaseExecutor,
     ) = SearchViewModel(
         getLocationAutoCompleteUseCase,
         autoCompleteDomainToPresentationMapper,
+        getWeatherUseCase,
+        weatherDetailToPresentationMapper,
         useCaseExecutor,
     )
 }

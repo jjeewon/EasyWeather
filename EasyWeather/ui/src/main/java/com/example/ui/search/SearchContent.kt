@@ -1,7 +1,6 @@
 package com.example.ui.search
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -38,11 +37,13 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.presentation.search.model.LocationPresentationModel
+import com.example.presentation.search.model.SearchWeatherUiState
 
 @Composable
 fun SearchContent(
     modifier: Modifier,
     itemList: List<LocationPresentationModel>,
+    searchWeatherUiState: SearchWeatherUiState,
     onQueryChange: (String) -> Unit,
     onItemSelected: (LocationPresentationModel) -> Unit,
 ){
@@ -63,6 +64,10 @@ fun SearchContent(
                 .padding(horizontal = 10.dp),
             itemList = itemList,
             onItemSelected = onItemSelected
+        )
+        WeatherItemList(
+            modifier = modifier.padding(top = 16.dp),
+            searchWeatherUiState = searchWeatherUiState
         )
     }
 }
@@ -101,12 +106,12 @@ fun SearchBar(
     searchIconClicked: () -> Unit,
     onQueryChange: (String) -> Unit
 ) {
+    val interactionSource = remember { MutableInteractionSource() }
     val animationOffset by animateIntAsState(
         if (isSpreadOut) 0 else (-200), // Adjust the offset as needed
         tween(durationMillis = 500)
     )
     var query by remember { mutableStateOf("") }
-    val interactionSource = remember { MutableInteractionSource() }
     Box() {
         AnimatedVisibility(
             modifier = modifier
@@ -124,6 +129,7 @@ fun SearchBar(
         ) {
             BasicTextField(
                 value = query,
+                interactionSource = interactionSource,
                 onValueChange = {
                     query = it
                     onQueryChange(it)
@@ -175,8 +181,8 @@ fun PreviewSearchContent(){
     SearchContent(
         modifier = Modifier,
         itemList = listOf(),
+        searchWeatherUiState = SearchWeatherUiState.Invisible,
         onQueryChange = {},
         onItemSelected = {}
-
     )
 }
