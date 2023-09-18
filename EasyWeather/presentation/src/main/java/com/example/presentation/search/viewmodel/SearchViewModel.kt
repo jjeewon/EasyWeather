@@ -14,9 +14,13 @@ import com.example.presentation.weather.mapper.WeatherDomainToPresentationMapper
 import com.example.presentation.weather.model.WeatherOverViewUiState
 import com.example.presentation.weatherdetail.mapper.WeatherDetailToPresentationMapper
 import com.example.presentation.weatherdetail.model.WeatherCardUiState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchViewModel(
+
+@HiltViewModel
+class SearchViewModel @Inject constructor(
     private val getLocationAutoCompleteUseCase: GetLocationAutoCompleteUseCase,
     private val autoCompleteDomainToPresentationMapper: AutoCompleteDomainToPresentationMapper,
     private val getWeatherUseCase: GetWeatherUseCase,

@@ -6,20 +6,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.presentation.search.viewmodel.SearchViewModel
-import com.example.presentation.weather.viewmodel.WeatherViewModel
-import com.example.presentation.weatherdetail.viewmodel.WeatherDetailViewModel
 import com.example.ui.theme.WeatherTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WeatherApp(
-    weatherViewModel: WeatherViewModel,
-    weatherDetailViewModel: WeatherDetailViewModel,
-    searchViewModel: SearchViewModel,
-) {
+fun WeatherApp() {
     WeatherTheme {
         val navController = rememberNavController()
         val currentBackStack by navController.currentBackStackEntryAsState()
@@ -41,9 +35,9 @@ fun WeatherApp(
             WeatherNavHost(
                 navController = navController,
                 modifier = Modifier.padding(innerPadding),
-                weatherViewModel,
-                weatherDetailViewModel,
-                searchViewModel,
+                weatherViewModel = viewModel(),
+                weatherDetailViewModel = viewModel(),
+                searchViewModel = viewModel(),
             )
         }
     }

@@ -1,6 +1,5 @@
 package com.example.presentation.weatherdetail.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.domains.architecture.usecase.UseCaseExecutor
 import com.example.domains.weather.usecase.GetWeatherUseCase
@@ -8,9 +7,12 @@ import com.example.presentation.architecture.viewmodel.BaseViewModel
 import com.example.presentation.weatherdetail.mapper.WeatherDetailToPresentationMapper
 import com.example.presentation.weatherdetail.model.WeatherCardUiState
 import com.example.presentation.weatherdetail.model.WeatherDetailUiState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WeatherDetailViewModel(
+@HiltViewModel
+class WeatherDetailViewModel @Inject constructor(
     private val getWeatherUseCase: GetWeatherUseCase,
     private val weatherDomainToPresentationMapper: WeatherDetailToPresentationMapper,
     useCaseExecutor: UseCaseExecutor,

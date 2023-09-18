@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.example.presentation.search.model.LocationPresentationModel
 import com.example.presentation.search.viewmodel.SearchViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)

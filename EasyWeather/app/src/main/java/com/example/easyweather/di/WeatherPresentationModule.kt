@@ -26,50 +26,11 @@ object WeatherPresentationModule {
     @Provides
     fun providesFutureWeatherDomainToPresentationMapper() = FutureWeatherDomainToPresentationMapper()
 
-    @Provides
-    fun providesPhoneDetailViewModel(
-        getWeatherUseCase: GetWeatherUseCase,
-        getFutureWeatherUseCase: GetFutureWeatherUseCase,
-        weatherDomainToPresentationMapper: WeatherDomainToPresentationMapper,
-        futureWeatherDomainToPresentationMapper: FutureWeatherDomainToPresentationMapper,
-        useCaseExecutor: UseCaseExecutor,
-    ) = WeatherViewModel(
-        getWeatherUseCase,
-        getFutureWeatherUseCase,
-        weatherDomainToPresentationMapper,
-        futureWeatherDomainToPresentationMapper,
-        useCaseExecutor,
-    )
 
     @Provides
     fun providesWeatherDetailToPresentationMapper() = WeatherDetailToPresentationMapper()
 
-    @Provides
-    fun providesWeatherDetailViewModel(
-        getWeatherUseCase: GetWeatherUseCase,
-        weatherDetailToPresentationMapper: WeatherDetailToPresentationMapper,
-        useCaseExecutor: UseCaseExecutor,
-    ) = WeatherDetailViewModel(
-        getWeatherUseCase,
-        weatherDetailToPresentationMapper,
-        useCaseExecutor,
-    )
 
     @Provides
     fun providesAutoCompleteDomainToPresentationMapper() = AutoCompleteDomainToPresentationMapper()
-
-    @Provides
-    fun providesSearchViewModel(
-        getLocationAutoCompleteUseCase: GetLocationAutoCompleteUseCase,
-        autoCompleteDomainToPresentationMapper: AutoCompleteDomainToPresentationMapper,
-        getWeatherUseCase: GetWeatherUseCase,
-        weatherDetailToPresentationMapper: WeatherDetailToPresentationMapper,
-        useCaseExecutor: UseCaseExecutor,
-    ) = SearchViewModel(
-        getLocationAutoCompleteUseCase,
-        autoCompleteDomainToPresentationMapper,
-        getWeatherUseCase,
-        weatherDetailToPresentationMapper,
-        useCaseExecutor,
-    )
 }

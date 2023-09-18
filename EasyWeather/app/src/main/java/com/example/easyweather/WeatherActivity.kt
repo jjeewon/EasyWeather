@@ -22,14 +22,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class WeatherActivity : ComponentActivity() {
-    @Inject
-    lateinit var viewModel: WeatherViewModel
-
-    @Inject
-    lateinit var weatherDetailViewModel: WeatherDetailViewModel
-
-    @Inject
-    lateinit var searchViewModel: SearchViewModel
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -37,16 +29,11 @@ class WeatherActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            WeatherApp(
-                viewModel,
-                weatherDetailViewModel,
-                searchViewModel,
-            )
+            WeatherApp()
         }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLocationPermission()
-        viewModel.onEntered()
     }
 
     private fun getLocationPermission() {
@@ -107,10 +94,13 @@ class WeatherActivity : ComponentActivity() {
             override fun onLocationResult(locationResult: LocationResult) {
                 locationResult.lastLocation?.let { location ->
                     // Handle the received location
+                    /*
                     viewModel.getWeatherFromLocation(
                         lat = location.latitude,
                         lng = location.longitude
                     )
+                     */
+
                 }
             }
         }

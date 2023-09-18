@@ -10,11 +10,14 @@ import com.example.presentation.weather.mapper.WeatherDomainToPresentationMapper
 import com.example.presentation.weather.model.FutureWeatherUiState
 import com.example.presentation.weather.model.WeatherOverViewUiState
 import com.example.presentation.weather.model.WeatherUiState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import javax.inject.Inject
 
-class WeatherViewModel(
+@HiltViewModel
+class WeatherViewModel @Inject constructor(
     private val getWeatherUseCase: GetWeatherUseCase,
     private val getFutureWeatherUseCase: GetFutureWeatherUseCase,
     private val weatherDomainToPresentationMapper: WeatherDomainToPresentationMapper,

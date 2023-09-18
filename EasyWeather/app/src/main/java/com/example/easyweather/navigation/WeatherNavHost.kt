@@ -2,6 +2,7 @@ package com.example.easyweather.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -47,8 +48,8 @@ fun WeatherNavHost(
         ) { navBackStackEntry ->
             val latLng = navBackStackEntry.arguments?.getString(SingleWeather.latLngArg)
             WeatherDetailScreen(
+                latLng = latLng,
                 viewModel = weatherDetailViewModel,
-                latLng = latLng
             )
         }
     }
