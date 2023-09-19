@@ -7,6 +7,7 @@ import android.os.Looper
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import com.example.easyweather.navigation.WeatherApp
 import com.example.presentation.search.viewmodel.SearchViewModel
@@ -24,6 +25,8 @@ import javax.inject.Inject
 class WeatherActivity : ComponentActivity() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+     private val viewModel by viewModels<WeatherViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,13 +97,10 @@ class WeatherActivity : ComponentActivity() {
             override fun onLocationResult(locationResult: LocationResult) {
                 locationResult.lastLocation?.let { location ->
                     // Handle the received location
-                    /*
                     viewModel.getWeatherFromLocation(
                         lat = location.latitude,
                         lng = location.longitude
                     )
-                     */
-
                 }
             }
         }
